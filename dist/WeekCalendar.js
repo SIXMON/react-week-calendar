@@ -83,8 +83,10 @@ var propTypes = {
     eventComponent: _propTypes2.default.object,
     onEventClick: _propTypes2.default.func,
 
-    modalComponent: _propTypes2.default.func,
-    useModal: _propTypes2.default.bool
+    modalComponent: _propTypes2.default.object,
+    useModal: _propTypes2.default.bool,
+
+    disabledSelection: _propTypes2.default.bool
 };
 
 var defaultProps = {
@@ -102,7 +104,8 @@ var defaultProps = {
     selectedIntervals: [],
     eventComponent: _Event2.default,
     modalComponent: _Modal2.default,
-    useModal: true
+    useModal: true,
+    disabledSelection: false
 };
 
 var WeekCalendar = function (_React$Component) {
@@ -370,7 +373,8 @@ var WeekCalendar = function (_React$Component) {
                         cellHeight: cellHeight,
                         dayCellComponent: dayCellComponent,
                         onSelectionStart: this.handleSelectionStart,
-                        onCellMouseEnter: this.handleCellMouseEnter
+                        onCellMouseEnter: this.handleCellMouseEnter,
+                        disabledSelection: this.props.disabledSelection
                     }),
                     this.renderSelectedIntervals(),
                     this.renderOverlay()

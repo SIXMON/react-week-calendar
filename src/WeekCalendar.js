@@ -35,6 +35,8 @@ const propTypes = {
 
     modalComponent: PropTypes.object,
     useModal: PropTypes.bool,
+
+    disabledSelection: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -53,6 +55,7 @@ const defaultProps = {
     eventComponent: Event,
     modalComponent: Modal,
     useModal: true,
+    disabledSelection: false,
 };
 
 class WeekCalendar extends React.Component {
@@ -495,6 +498,7 @@ class WeekCalendar extends React.Component {
                         dayCellComponent={dayCellComponent}
                         onSelectionStart={this.handleSelectionStart}
                         onCellMouseEnter={this.handleCellMouseEnter}
+                        disabledSelection={this.props.disabledSelection}
                     />
                     {this.renderSelectedIntervals()}
                     {this.renderOverlay()}
