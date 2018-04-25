@@ -322,12 +322,14 @@ class WeekCalendar extends React.Component {
                         return;
                     }
 
-                    const beforeIntersectionNumber = array.filter(
-                        (i, i1) => i1 < index && interval.start.isBefore(i.end)
-                    ).length;
+                    const beforeIntersectionNumber = array.filter((i, i1) => {
+                        return i1 < index && interval.start.isBefore(i.end);
+                    }).length;
+
                     const afterIntersectionNumber = array.filter(
                         (i, i1) => i1 > index && interval.end.isAfter(i.start)
                     ).length;
+
                     const groupIntersection =
                         beforeIntersectionNumber + afterIntersectionNumber + 1;
 

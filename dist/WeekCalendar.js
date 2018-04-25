@@ -205,9 +205,11 @@ var WeekCalendar = function (_React$Component) {
                         var beforeIntersectionNumber = array.filter(function (i, i1) {
                             return i1 < index && interval.start.isBefore(i.end);
                         }).length;
+
                         var afterIntersectionNumber = array.filter(function (i, i1) {
                             return i1 > index && interval.end.isAfter(i.start);
                         }).length;
+
                         var groupIntersection = beforeIntersectionNumber + afterIntersectionNumber + 1;
 
                         var endY = Utils.getNumberOfCells(interval.end, scaleUnit, true, offsetTop);
