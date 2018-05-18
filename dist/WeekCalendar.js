@@ -202,15 +202,17 @@ var WeekCalendar = function (_React$Component) {
                             return;
                         }
 
-                        var beforeIntersectionNumber = array.filter(function (i, i1) {
-                            return i1 < index && interval.start.isBefore(i.end);
-                        }).length;
+                        // const beforeIntersectionNumber = array.filter((i, i1) => {
+                        //     return i1 < index && interval.start.isBefore(i.end);
+                        // }).length;
+                        var beforeIntersectionNumber = 0;
 
                         var afterIntersectionNumber = array.filter(function (i, i1) {
                             return i1 > index && interval.end.isAfter(i.start);
                         }).length;
 
-                        var groupIntersection = beforeIntersectionNumber + afterIntersectionNumber + 1;
+                        var groupIntersection = 1;
+                        // beforeIntersectionNumber + afterIntersectionNumber + 1;
 
                         var endY = Utils.getNumberOfCells(interval.end, scaleUnit, true, offsetTop);
                         if (endY > scaleIntervals.length) {
