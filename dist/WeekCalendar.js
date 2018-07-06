@@ -215,13 +215,24 @@ var WeekCalendar = function (_React$Component) {
                         // beforeIntersectionNumber + afterIntersectionNumber + 1;
 
                         var endY = Utils.getNumberOfCells(interval.end, scaleUnit, true, offsetTop);
+
                         if (endY > scaleIntervals.length) {
                             endY = scaleIntervals.length;
                         }
-                        var top = startY * cellHeight;
-                        var width = (columnDimensions[dayIndex].width - 15) / groupIntersection;
-                        var left = columnDimensions[dayIndex].left + (width + 7) * beforeIntersectionNumber;
-                        var height = (endY - startY) * cellHeight;
+
+                        var top = startY % 2 == 0 ? startY * cellHeight + startY // top
+                        : startY * cellHeight + startY - 1; // bottom
+
+                        var width = (columnDimensions[dayIndex].width - 11) / groupIntersection;
+
+                        var left = columnDimensions[dayIndex].left + (width + 7) * beforeIntersectionNumber + 10;
+
+                        var l = endY - startY;
+
+                        var newHeight = l * cellHeight + (l % 2 == 0 ? l - 2 : l - 1);
+
+                        var height = l > 2 ? newHeight : l * cellHeight;
+
                         var eventWrapperStyle = {
                             top: top,
                             left: left,
@@ -258,18 +269,28 @@ var WeekCalendar = function (_React$Component) {
                 var mousePosition = this.state.mousePosition;
 
 
-                var top = Math.min(startPosition.y, mousePosition.y) * this.props.cellHeight;
+                var pos = Math.min(startPosition.y, mousePosition.y);
+                var top = pos * this.props.cellHeight + (pos % 2 == 0 ? pos : pos - 1);
+
                 var left = this.state.columnDimensions[Math.min(startPosition.x, mousePosition.x)].left;
 
+                left = left + 11;
+
                 var lastSelectedColumn = this.state.columnDimensions[Math.max(startPosition.x, mousePosition.x)];
+
                 var width = lastSelectedColumn.left - left + lastSelectedColumn.width;
-                var height = (Math.max(startPosition.y, mousePosition.y) + 1) * this.props.cellHeight - top;
+
+                console.log(Math.max(startPosition.y, mousePosition.y));
+
+                var height = (Math.max(startPosition.y, mousePosition.y) + 1) * this.props.cellHeight - top + (Math.max(startPosition.y, mousePosition.y) % 2 == 0 ? Math.max(startPosition.y, mousePosition.y) - 2 : Math.max(startPosition.y, mousePosition.y) - 1);
+
                 var overlayStyle = {
                     top: top,
                     left: left,
                     width: width,
                     height: height
                 };
+
                 return _react2.default.createElement("div", {
                     className: "weekCalendar__overlay weekCalendar__overlay_status_selection",
                     style: overlayStyle
