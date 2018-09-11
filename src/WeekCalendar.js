@@ -112,9 +112,11 @@ class WeekCalendar extends React.Component {
         const { numberOfDays } = this.props;
         const columnDimensions = [];
         for (let i = 0; i < numberOfDays; i += 1) {
-            const left = i === 0
-                ? 0
-                : columnDimensions[i - 1].left + columnDimensions[i - 1].width;
+            const left =
+                i === 0
+                    ? 0
+                    : columnDimensions[i - 1].left +
+                      columnDimensions[i - 1].width;
             let columnWidth = 0;
 
             const columnElement = document.querySelectorAll(
@@ -298,11 +300,14 @@ class WeekCalendar extends React.Component {
         const offsetTop = Utils.getOffset(scaleIntervals[0].start);
 
         for (let dayIndex = 0; dayIndex < numberOfDays; dayIndex += 1) {
-            const day = moment(firstDay).startOf("day").add(dayIndex, "day");
+            const day = moment(firstDay)
+                .startOf("day")
+                .add(dayIndex, "day");
+
             const intervals = selectedIntervals.filter(
                 interval =>
-                    interval.start.isSame(day, "day") ||
-                    interval.end.isSame(day, "day")
+                    interval.start.isoWeekday() == day.isoWeekday() ||
+                    interval.end.isoWeekday() == day.isoWeekday()
             );
             if (intervals.length > 0) {
                 intervals.sort((i1, i2) => i1.start.diff(i2.start, "minutes"));
@@ -345,9 +350,10 @@ class WeekCalendar extends React.Component {
                         endY = scaleIntervals.length;
                     }
 
-                    const top = startY % 2 == 0
-                        ? startY * cellHeight + startY // top
-                        : startY * cellHeight + startY - 1; // bottom
+                    const top =
+                        startY % 2 == 0
+                            ? startY * cellHeight + startY // top
+                            : startY * cellHeight + startY - 1; // bottom
 
                     const width =
                         (columnDimensions[dayIndex].width - 11) /

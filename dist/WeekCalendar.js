@@ -183,9 +183,14 @@ var WeekCalendar = function (_React$Component) {
             var offsetTop = Utils.getOffset(scaleIntervals[0].start);
 
             var _loop = function _loop(dayIndex) {
+                console.log("dayIndex: ", dayIndex);
+
                 var day = (0, _moment2.default)(firstDay).startOf("day").add(dayIndex, "day");
+
+                console.log(day);
+
                 var intervals = selectedIntervals.filter(function (interval) {
-                    return interval.start.isSame(day, "day") || interval.end.isSame(day, "day");
+                    return interval.start.isoWeekday() == day.isoWeekday() || interval.end.isoWeekday() == day.isoWeekday();
                 });
                 if (intervals.length > 0) {
                     intervals.sort(function (i1, i2) {
