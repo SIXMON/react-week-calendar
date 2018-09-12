@@ -419,8 +419,6 @@ class WeekCalendar extends React.Component {
             const width =
                 lastSelectedColumn.left - left + lastSelectedColumn.width;
 
-            console.log(Math.max(startPosition.y, mousePosition.y));
-
             const height =
                 (Math.max(startPosition.y, mousePosition.y) + 1) *
                     this.props.cellHeight -
